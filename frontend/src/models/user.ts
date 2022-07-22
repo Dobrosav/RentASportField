@@ -6,8 +6,6 @@ export class User{
     grad:string;
     datumRodjenja:string
     email:string;
-    agencija:string
-    brojLicence:string;
     telefon:string;
     tip:number;
     valid:boolean

@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
-//import userRouter from './routers/user.routes';
+const user_routes_1 = __importDefault(require("./routers/user.routes"));
 //import agencyRouter from './routers/agency.routes';
 //import adsRouter from './routers/ads.router';
 const app = (0, express_1.default)();
@@ -19,10 +19,10 @@ const connection = mongoose_1.default.connection;
 connection.once('open', () => {
     console.log('db connection ok');
 });
-//const router = express.Router();
-//router.use('/user',userRouter)
+const router = express_1.default.Router();
+router.use('/user', user_routes_1.default);
 //router.use('/agency',agencyRouter)
 //router.use('/ads',adsRouter)
-//app.use('/', router);
+app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map
