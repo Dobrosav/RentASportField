@@ -33,6 +33,14 @@ class UserControler {
                     res.json(users);
             });
         };
+        this.getInvalidUsers = (req, res) => {
+            user_1.default.find({ 'valid': false }, (err, users) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(users);
+            });
+        };
     }
 }
 exports.UserControler = UserControler;

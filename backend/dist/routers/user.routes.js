@@ -9,5 +9,6 @@ const userRouter = express_1.default.Router();
 userRouter.route('/login').post((req, res) => new user_controller_1.UserControler().login(req, res));
 userRouter.route('/register').post((req, res) => new user_controller_1.UserControler().register(req, res));
 userRouter.route("/kime").get((req, res) => new user_controller_1.UserControler().getAllUser(req, res));
+userRouter.route("/getInvalidUser").get((req, res) => new user_controller_1.UserControler().getInvalidUsers(req, res));
 exports.default = userRouter;
 //# sourceMappingURL=user.routes.js.map
