@@ -1,0 +1,20 @@
+<table>
+    <tr *ngFor="let u of invalidUsers">
+        <td>{{u.ime}}</td>
+        <td>{{u.prezime}}</td>
+        <td>{{u.korime}}</td>
+        <td><button class="btn btn-success" (click)="confirm(u.korime)">Potvrdi</button></td>
+    </tr>
+</table>
+
+<table class="allUsers">
+    <tr *ngFor="let u of allUsers">
+        <td>{{u.ime}}</td>
+        <td>{{u.prezime}}</td>
+        <td>{{u.korime}}</td>
+        <td><button class="btn btn-danger" (click)="deleteUser(u.korime)">Obrisi korisnika</button></td>
+    </tr>
+</table>
+<a routerLink="/">Izloguj se</a>
+<br>
+<a routerLink="/admin">Admin pocetna</a>

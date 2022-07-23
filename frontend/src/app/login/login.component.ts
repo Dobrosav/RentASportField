@@ -10,7 +10,7 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private s: UserService, r: Router) { }
+  constructor(private s: UserService, private r: Router) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
       if (user) {
         sessionStorage.setItem("user", user.korime);
         if (user.tip == 0)
-          alert("admin");
+            this.r.navigate(["/admin"])
         else if (user.tip == 1)
           alert("rekrativac");
         else

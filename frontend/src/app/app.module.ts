@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UserConfirmationComponent } from './user-confirmation/user-confirmation.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PocetnaComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserConfirmationComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

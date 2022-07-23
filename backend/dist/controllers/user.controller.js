@@ -41,6 +41,79 @@ class UserControler {
                     res.json(users);
             });
         };
+        this.confirm = (req, res) => {
+            let korime = req.body.korime;
+            user_1.default.findOne({ "korime": korime }, (err, users) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (users) {
+                        user_1.default.collection.updateOne({ 'korime': korime }, { $set: { 'valid': true } });
+                        res.json({ 'message': 'ok' });
+                    }
+                    else
+                        res.json({ 'message': 'error' });
+                }
+            });
+        };
+        this.update = (req, res) => {
+            let korime = req.body.korime;
+            let ime = req.body.ime;
+            let prezime = req.body.prezime;
+            user_1.default.findOne({ "korime": korime }, (err, users) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (users) {
+                        user_1.default.collection.updateOne({ 'korime': korime }, { $set: { 'ime': ime, 'prezime': prezime } });
+                        res.json({ 'message': 'ok' });
+                    }
+                    else
+                        res.json({ 'message': 'error' });
+                }
+            });
+        };
+        this.changePassword = (req, res) => {
+            let korime = req.body.korime;
+            let password = req.body.lozinka;
+            console.log(korime + " " + password);
+            user_1.default.findOne({ "korime": korime }, (err, users) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (users) {
+                        user_1.default.collection.updateOne({ 'korime': korime }, { $set: { 'lozinka': password } });
+                        res.json({ 'message': 'ok' });
+                    }
+                    else
+                        res.json({ 'message': 'error' });
+                }
+            });
+        };
+        this.delete = (req, res) => {
+            let korime = req.body.korime;
+            user_1.default.findOne({ "korime": korime }, (err, users) => {
+                if (err)
+                    console.log(err);
+                else {
+                    if (users) {
+                        user_1.default.collection.deleteOne({ 'korime': korime });
+                        res.json({ 'message': 'ok' });
+                    }
+                    else
+                        res.json({ 'message': 'error' });
+                }
+            });
+        };
+        this.getUserPerUsername = (req, res) => {
+            let korime = req.body.korime;
+            user_1.default.findOne({ "korime": korime }, (err, user) => {
+                if (err)
+                    console.log(err);
+                else
+                    res.json(user);
+            });
+        };
     }
 }
 exports.UserControler = UserControler;
