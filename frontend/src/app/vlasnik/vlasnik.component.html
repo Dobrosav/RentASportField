@@ -1,0 +1,53 @@
+<h1>Dodaj novi objekat</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <table>
+                <tr>
+                    <td>Naziv</td>
+                    <td><input type="text" name="naziv" [(ngModel)]="naziv"></td>
+                </tr>
+                <tr>
+                    <td>Kategorija</td>
+                    <td>
+                        <select name="kategorija" [(ngModel)]="kategorija">
+                            <option value="" selected></option>
+                            <option value="balon za fudbal">balon za fudbal</option>
+                            <option value="teren za tenis (otvoreni)">teren za tenis (otvoreni)</option>
+                            <option value="teren za tenis (zatvoreni)">teren za tenis (zatvoreni)</option>
+                            <option value="karting staza">karting staza</option>
+                            <option value="teren za odbojku na pesku">teren za odbojku na pesku</option>
+                            <option value="sala za kosarku">sala za kosarku</option>
+                            <option value="sala za odbojku">sala za odbojku</option>
+                            <option value="trim staza za trcanje">trim staza za trcanje</option>
+                            <option value="teren za skvos">teren za skvos</option>
+                            <option value="teren za padl">teren za padl</option>
+                            <option value="teren za paintball">teren za paintball</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Adresa</td>
+                    <td><input type="text" name="adresa" [(ngModel)]="adresa"></td>
+                </tr>
+                <tr>
+                    <td>Grad</td>
+                    <td><input type="text" name="grad" [(ngModel)]="grad"></td>
+                </tr>
+                <tr>
+                    <td>Telefon</td>
+                    <td><input type="text" name="telefon" [(ngModel)]="telefon"></td>
+                </tr>
+                <tr>
+                    <td>e-mail</td>
+                    <td><input type="text" name="email" [(ngModel)]="email"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="btn btn-success" (click)="dodajObjekat()">Dodaj objekat</button></td>
+                </tr>
+            </table>
+            {{poruka}}
+        </div>
+    </div>
+</div>
+<a routerLink="/">Odjavi</a><br>

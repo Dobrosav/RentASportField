@@ -24,12 +24,12 @@ export class LoginComponent implements OnInit {
         if (user.tip == 0)
             this.r.navigate(["/admin"])
         else if (user.tip == 1)
-          alert("rekrativac");
+          this.r.navigate(["/rekreativac"])
         else
-          alert("vlasnik");
+          this.r.navigate(["/vlasnik"])
       }
       else
-        this.poruka = "";
+        this.poruka = "Bad Data!";
 
     })
   }
