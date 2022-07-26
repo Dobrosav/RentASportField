@@ -1,0 +1,27 @@
+<table>
+    <tr>
+        <td>Datum</td>
+        <td><input type="date" name="date" [(ngModel)]="date"></td>
+    </tr>
+    <tr>
+        <td>Vreme od</td>
+        <td><input type="time" name="timeoff" [(ngModel)]="timeoff"></td>
+    </tr>
+    <tr>
+        <td>Vreme do</td>
+        <td><input type="time" name="timeto" [(ngModel)]="timeto"></td>
+    </tr>
+    <tr>
+        <td>Kapacitet</td>
+        <td><input type="number" name="capacity" min="0" [(ngModel)]="capacity"></td>
+    </tr>
+    <tr>
+        <td>Cena</td>
+        <td><input type="number" name="cena" min="9" [(ngModel)]="cena"></td>
+    </tr>
+    <tr>
+       <td colspan="2"><button class="btn btn-success" (click)="insert()">Unesi termin</button></td>
+    </tr>
+</table>
+<a routerLink="/vlasnik/termini">Vrati se</a> <br>
+<a routerLink="/">Odjavi se</a>

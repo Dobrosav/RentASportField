@@ -10,4 +10,7 @@ sportObjectRouter.route("/newObject").post(
 sportObjectRouter.route("/getAllObjectsOfOwner").post(
     (req,res)=>new SportObjectController().getAllObjectOfOwner(req,res)
 )
+sportObjectRouter.route("/getById").post(
+    (req,res)=> new SportObjectController().getById(req,res)
+)
 export default sportObjectRouter

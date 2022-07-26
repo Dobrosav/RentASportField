@@ -1,0 +1,12 @@
+{{poruka}}
+<h1>Moji objekti</h1>
+<table>
+    <tr *ngFor="let o of objekti">
+        <td>{{o.naziv}}</td>
+        <td>{{o.adresa}}</td>
+        <td>{{o.grad}}</td>
+        <td><button class="btn btn-success" (click)="clickToInputDateInfo(o.id)">Unesi slobodne termine</button></td>
+    </tr>
+</table>
+<a routerLink="/vlasnik">Vrati se</a> <br>
+<a routerLink="/">Odjavi se</a>

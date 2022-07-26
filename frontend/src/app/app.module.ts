@@ -12,6 +12,8 @@ import { UserConfirmationComponent } from './user-confirmation/user-confirmation
 import { AdminComponent } from './admin/admin.component';
 import { RekreativacComponent } from './rekreativac/rekreativac.component';
 import { VlasnikComponent } from './vlasnik/vlasnik.component';
+import { PrikazSvihObjekataComponent } from './prikaz-svih-objekata/prikaz-svih-objekata.component';
+import { TerminiComponent } from './termini/termini.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { VlasnikComponent } from './vlasnik/vlasnik.component';
     UserConfirmationComponent,
     AdminComponent,
     RekreativacComponent,
-    VlasnikComponent
+    VlasnikComponent,
+    PrikazSvihObjekataComponent,
+    TerminiComponent
   ],
   imports: [
     BrowserModule,

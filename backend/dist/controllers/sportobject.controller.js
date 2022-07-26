@@ -32,6 +32,15 @@ class SportObjectController {
                     res.json(so);
             });
         };
+        this.getById = (req, res) => {
+            let id = req.body.id;
+            sportobject_1.default.findOne({ 'id': parseInt(id) }, (err, so) => {
+                if (err)
+                    console.error(err);
+                else
+                    res.json(so);
+            });
+        };
     }
 }
 exports.SportObjectController = SportObjectController;

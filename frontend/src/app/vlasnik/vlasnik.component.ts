@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SportObject } from 'src/models/sportobject';
 import { SportObjectService } from '../sport-object.service';
 
@@ -9,12 +10,17 @@ import { SportObjectService } from '../sport-object.service';
 })
 export class VlasnikComponent implements OnInit {
 
-  constructor(private s: SportObjectService) { }
+  constructor(private s: SportObjectService, private r:Router) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem("user")==null){
+      alert("You did not log in");
+      return;
+    }
+    this.link = this.r.url;
     this.korime = sessionStorage.getItem("user");
   }
-
+  link:string;
   naziv: string;
   kategorija: string;
   adresa: string;

@@ -1,1 +1,43 @@
-<p>rekreativac works!</p>
+<table>
+    <tr>
+        <td>Naziv:</td>
+        <td><input type="text" name="naziv" [(ngModel)]="naziv"></td>
+        <td>Kategorija:</td>
+                    <td>
+                        <select name="kategorija" [(ngModel)]="kategorija">
+                            <option value="" selected></option>
+                            <option value="balon za fudbal">balon za fudbal</option>
+                            <option value="teren za tenis (otvoreni)">teren za tenis (otvoreni)</option>
+                            <option value="teren za tenis (zatvoreni)">teren za tenis (zatvoreni)</option>
+                            <option value="karting staza">karting staza</option>
+                            <option value="teren za odbojku na pesku">teren za odbojku na pesku</option>
+                            <option value="sala za kosarku">sala za kosarku</option>
+                            <option value="sala za odbojku">sala za odbojku</option>
+                            <option value="trim staza za trcanje">trim staza za trcanje</option>
+                            <option value="teren za skvos">teren za skvos</option>
+                            <option value="teren za padl">teren za padl</option>
+                            <option value="teren za paintball">teren za paintball</option>
+                        </select>
+                    </td>
+        <td>Datum:</td>
+        <td><input type="date" name="date" [(ngModel)]="date"></td>
+        <td>Vreme od:</td>
+        <td><input type="time" name="timeoff" [(ngModel)]="timeoff"></td>
+        <td>Vreme do:</td>
+        <td><input type="time" name="timeto" [(ngModel)]="timeto"></td>
+        <td><button (click)="filter()" class="btn btn-success">Filtriraj</button></td>
+    </tr>
+</table>
+<div class="container">
+<div class="row" *ngFor="let b of bookings">
+    <div class="col-sm-12 border border-primary">
+        <h3>{{b.naziv}} </h3>
+        <h4>{{b.kategorija}}</h4>
+        Preostali kapacitet:{{b.capacity}} cena:{{b.cena}} <br>
+        datum: {{b.date}} <br>
+        Vreme: {{b.timeoff}}-{{b.timeto}} <br>
+        <button class="btn btn-success">Rezervisi</button> <button class="btn btn-info">Pogledaj informaciije o objektu</button>
+    </div>
+</div>
+</div>
+<a routerLink="/">Odjavi</a>

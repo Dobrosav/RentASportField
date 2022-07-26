@@ -3,7 +3,8 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import userRouter from './routers/user.routes';
-import sportObjectRouter from './routers/sportobject.routes';;
+import sportObjectRouter from './routers/sportobject.routes';
+import bookingRouter from './routers/booking.routes';;
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,6 @@ connection.once('open', ()=>{
 const router = express.Router();
 router.use('/user',userRouter)
 router.use('/sportObject',sportObjectRouter)
-//router.use('/ads',adsRouter)
+router.use('/booking', bookingRouter)
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

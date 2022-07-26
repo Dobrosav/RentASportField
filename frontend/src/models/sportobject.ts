@@ -6,5 +6,5 @@ export class SportObject{
     grad:string;
     telefon:string;
     email:string;
-    korime:string
+    korime:string;
 }
