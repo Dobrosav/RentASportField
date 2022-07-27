@@ -38,4 +38,10 @@ export class BookingService {
     }
     return this.http.post(`${this.uri}/booking/insert`,data)
   }
+  getInfoByIdTerm(idterm){
+    const data={
+      idterm:idterm
+    }
+    return this.http.post(`${this.uri}/booking/getInfoByIdTerm`,data)
+  }
 }

@@ -14,4 +14,7 @@ bookingRouter.route("/insert").post(
 bookingRouter.route("/getAllTermin").get(
     (req, res) => new BookingController().getAllTermin(req, res)
 )
+bookingRouter.route("/getInfoByIdTerm").post(
+    (req, res) => new BookingController().getInfoByIdTerm(req, res)
+)
 export default bookingRouter;

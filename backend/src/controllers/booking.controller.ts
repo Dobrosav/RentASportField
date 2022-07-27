@@ -10,8 +10,8 @@ export class BookingController {
         })
     }
     getAllTermin = (req: express.Request, res: express.Response) => {
-        Booking.find({},(err, booking)=>{
-            if(err) console.error(err);
+        Booking.find({}, (err, booking) => {
+            if (err) console.error(err);
             else res.json(booking)
         })
     }
@@ -29,13 +29,20 @@ export class BookingController {
             }
         })
     }
-    insert = (req: express.Request, res:express.Response) => {
+    insert = (req: express.Request, res: express.Response) => {
         let book = new Booking(req.body)
         book.save().then(
-            book=>{
-                res.status(200).json({'message':'termin added'})
-            }).catch(err=>{
-                res.status(400).json({'message':'error'})
+            book => {
+                res.status(200).json({ 'message': 'termin added' })
+            }).catch(err => {
+                res.status(400).json({ 'message': 'error' })
             })
+    }
+    getInfoByIdTerm = (req: express.Request, res: express.Response) => {
+        let idterm = req.body.idterm
+        Booking.findOne({ 'idterm': idterm }, (err, booking) => {
+            if (err) console.error(err);
+            else res.json(booking)
+        })
     }
 }

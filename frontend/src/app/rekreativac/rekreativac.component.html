@@ -30,13 +30,24 @@
 </table>
 <div class="container">
 <div class="row" *ngFor="let b of bookings">
-    <div class="col-sm-12 border border-primary">
+    <div class="col-sm-6 border border-primary">
         <h3>{{b.naziv}} </h3>
         <h4>{{b.kategorija}}</h4>
         Preostali kapacitet:{{b.capacity}} cena:{{b.cena}} <br>
         datum: {{b.date}} <br>
         Vreme: {{b.timeoff}}-{{b.timeto}} <br>
-        <button class="btn btn-success">Rezervisi</button> <button class="btn btn-info">Pogledaj informaciije o objektu</button>
+        <button class="btn btn-success" (click)="bookOpen(b.idterm)">Rezervisi</button> <button class="btn btn-info">Pogledaj informaciije o objektu</button>
+    </div>
+    <div class="col-sm-6" *ngIf="clicked[b.idterm-1]">
+        <table>
+            <tr>
+                <td>Broj osoba</td>
+                <td><input type="number" name="brojosoba" min="1" [(ngModel)]="brOsoba"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button class="btn btn-success" (click)="reserve(b.idterm)">Rezervisi</button></td>
+            </tr>
+        </table>
     </div>
 </div>
 </div>

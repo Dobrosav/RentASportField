@@ -48,6 +48,15 @@ class BookingController {
                 res.status(400).json({ 'message': 'error' });
             });
         };
+        this.getInfoByIdTerm = (req, res) => {
+            let idterm = req.body.idterm;
+            booking_1.default.findOne({ 'idterm': idterm }, (err, booking) => {
+                if (err)
+                    console.error(err);
+                else
+                    res.json(booking);
+            });
+        };
     }
 }
 exports.BookingController = BookingController;
