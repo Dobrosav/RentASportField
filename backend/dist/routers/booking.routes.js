@@ -11,5 +11,6 @@ bookingRouter.route("/update").post((req, res) => new booking_controller_1.Booki
 bookingRouter.route("/insert").post((req, res) => new booking_controller_1.BookingController().insert(req, res));
 bookingRouter.route("/getAllTermin").get((req, res) => new booking_controller_1.BookingController().getAllTermin(req, res));
 bookingRouter.route("/getInfoByIdTerm").post((req, res) => new booking_controller_1.BookingController().getInfoByIdTerm(req, res));
+bookingRouter.route("/pdf").post((req, res) => new booking_controller_1.BookingController().pdf(req, res));
 exports.default = bookingRouter;
 //# sourceMappingURL=booking.routes.js.map

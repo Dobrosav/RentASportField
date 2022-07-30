@@ -4,6 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingController = void 0;
+const nodemailer_1 = __importDefault(require("nodemailer"));
+const jspdf_1 = __importDefault(require("jspdf"));
 const booking_1 = __importDefault(require("../models/booking"));
 class BookingController {
     constructor() {
@@ -56,6 +58,52 @@ class BookingController {
                 else
                     res.json(booking);
             });
+        };
+        this.pdf = (req, res) => {
+            let ime = req.body.ime;
+            let prezime = req.body.prezime;
+            let cenaosoba = req.body.cenaosoba;
+            let brojOsoba = req.body.brojOsoba;
+            let date = req.body.date;
+            let vremeod = req.body.vremeod;
+            let vremedo = req.body.vremedo;
+            let naziv = req.body.naziv;
+            let mail = req.body.email;
+            let telefon = req.body.telefon;
+            let user = req.body.user;
+            let mailk = req.body.emailk;
+            let nazivpdf = "predracun" + user + ".pdf";
+            var pdf = new jspdf_1.default();
+            pdf.text("PODACI O UPLATIOCU", 10, 10);
+            let text;
+            text = ime + " " + prezime + "\n" + "cena:" + cenaosoba + "\n";
+            text += "broj osoba:" + brojOsoba + "\n" + "datum:" + date + "\n" + "vreme:" + vremeod + "-" + vremedo + "\n";
+            text += "PODACI O PRIMAOCU\n";
+            text += "mail " + mail + " naziv objekta " + naziv + " telefon:" + telefon;
+            pdf.text(text, 10, 20);
+            pdf.save(nazivpdf);
+            const tranporter = nodemailer_1.default.createTransport({
+                service: "hotmail",
+                auth: {
+                    user: "vlaskovicdodo98@outlook.com",
+                    pass: "partizan98"
+                }
+            });
+            const email = {
+                from: "vlaskovicdodo98@outlook.com",
+                to: mailk,
+                subject: "Predracun za sportski objekat",
+                text: "Postovani/a \n U prilogu se nalazi predracun  \n Srdacan pozdrav",
+                attachments: [{
+                        filename: nazivpdf,
+                        path: './' + nazivpdf,
+                        contentType: 'application/pdf'
+                    }]
+            };
+            tranporter.sendMail(email).catch(err => {
+                console.log(err);
+            });
+            res.json({ 'message': "ok" });
         };
     }
 }
