@@ -1,31 +1,37 @@
+<select class="lang" #selectedLang (change)="switchLang(selectedLang.value)">
+    <option *ngFor="let language of translate.getLangs()" [value]="language"
+        [selected]="language === translate.currentLang">
+        {{ language }}
+    </option>
+</select>
 <table>
     <tr>
-        <td>Naziv:</td>
+        <td>{{'naziv'|translate}}:</td>
         <td><input type="text" name="naziv" [(ngModel)]="naziv"></td>
-        <td>Kategorija:</td>
+        <td>{{'kategorija'|translate}}:</td>
                     <td>
                         <select name="kategorija" [(ngModel)]="kategorija">
                             <option value="" selected></option>
-                            <option value="balon za fudbal">balon za fudbal</option>
-                            <option value="teren za tenis (otvoreni)">teren za tenis (otvoreni)</option>
-                            <option value="teren za tenis (zatvoreni)">teren za tenis (zatvoreni)</option>
-                            <option value="karting staza">karting staza</option>
-                            <option value="teren za odbojku na pesku">teren za odbojku na pesku</option>
-                            <option value="sala za kosarku">sala za kosarku</option>
-                            <option value="sala za odbojku">sala za odbojku</option>
-                            <option value="trim staza za trcanje">trim staza za trcanje</option>
-                            <option value="teren za skvos">teren za skvos</option>
-                            <option value="teren za padl">teren za padl</option>
-                            <option value="teren za paintball">teren za paintball</option>
+                            <option value="balon za fudbal">{{'balonzafudbal'|translate}}</option>
+                            <option value="teren za tenis (otvoreni)">{{'terenzatenisotvoreni'|translate}}</option>
+                            <option value="teren za tenis (zatvoreni)">{{'terenzateniszatvoreni'|translate}}</option>
+                            <option value="karting staza">{{'kartingstaza'|translate}}</option>
+                            <option value="teren za odbojku na pesku">{{'terenzaodbojkunapesku'|translate}}</option>
+                            <option value="sala za kosarku">{{'salazakosarku'|translate}}</option>
+                            <option value="sala za odbojku">{{'salazaodbojku'|translate}}</option>
+                            <option value="trim staza za trcanje">{{'trimstazazatrcanje'|translate}}</option>
+                            <option value="teren za skvos">{{'terenzaskvos'|translate}}</option>
+                            <option value="teren za padl">{{'terenzapadl'|translate}}</option>
+                            <option value="teren za paintball">{{'terenzapaintball'|translate}}</option>
                         </select>
                     </td>
-        <td>Datum:</td>
+        <td>{{'datum'|translate}}:</td>
         <td><input type="date" name="date" [(ngModel)]="date"></td>
-        <td>Vreme od:</td>
+        <td>{{'vremeod'|translate}}:</td>
         <td><input type="time" name="timeoff" [(ngModel)]="timeoff"></td>
-        <td>Vreme do:</td>
+        <td>{{'vremedo'|translate}}:</td>
         <td><input type="time" name="timeto" [(ngModel)]="timeto"></td>
-        <td><button (click)="filter()" class="btn btn-success">Filtriraj</button></td>
+        <td><button (click)="filter()" class="btn btn-success">{{'filtriraj'|translate}}</button></td>
     </tr>
 </table>
 <div class="container">
@@ -33,22 +39,22 @@
     <div class="col-sm-6 border border-primary">
         <h3>{{b.naziv}} </h3>
         <h4>{{b.kategorija}}</h4>
-        Preostali kapacitet:{{b.capacity}} cena:{{b.cena}} <br>
-        datum: {{b.date}} <br>
-        Vreme: {{b.timeoff}}-{{b.timeto}} <br>
-        <button class="btn btn-success" (click)="bookOpen(b.idterm)">Rezervisi</button> <button class="btn btn-info">Pogledaj informaciije o objektu</button>
+        {{'kapacitet'|translate}}:{{b.capacity}} {{'cena'|translate}}:{{b.cena}} <br>
+        {{'datum'|translate}}: {{b.date}} <br>
+        {{'time'|translate}}: {{b.timeoff}}-{{b.timeto}} <br>
+        <button class="btn btn-success" (click)="bookOpen(b.idterm)">{{'rezervisi'|translate}}</button> <button class="btn btn-info">{{'infoobjekat'|translate}}</button>
     </div>
     <div class="col-sm-6" *ngIf="clicked[b.idterm-1]">
         <table>
             <tr>
-                <td>Broj osoba</td>
-                <td><input type="number" name="brojosoba" min="1" [(ngModel)]="brOsoba"></td>
+                <td>{{'brosoba'|translate}}</td>
+                <td><input type="number"  name="brojosoba" min="1" [(ngModel)]="brOsoba"></td>
             </tr>
             <tr>
-                <td colspan="2"><button class="btn btn-success" (click)="reserve(b.idterm)">Rezervisi</button></td>
+                <td colspan="2"><button class="btn btn-success" (click)="reserve(b.idterm)">{{'rezervisi'|translate}}</button></td>
             </tr>
         </table>
     </div>
 </div>
 </div>
-<a routerLink="/">Odjavi</a>
+<a routerLink="/">{{'odjavi'|translate}}</a>

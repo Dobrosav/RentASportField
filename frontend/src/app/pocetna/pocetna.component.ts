@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pocetna',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PocetnaComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public translate: TranslateService) {
+    translate.setDefaultLang("sr-lat")
+    if (sessionStorage.getItem("lang") == null)
+      translate.use('sr-lat')
+    else
+      translate.use(sessionStorage.getItem("lang"))
+    translate.addLangs(["sr-lat", "sr-cyr", "en"])
+  }
+  switchLang(lang: string): void {
+    this.translate.use(lang);
+    sessionStorage.setItem("lang", lang)
+  }
   ngOnInit(): void {
+
   }
 
 }

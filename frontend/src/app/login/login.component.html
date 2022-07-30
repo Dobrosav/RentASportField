@@ -1,25 +1,38 @@
+<select class="lang" #selectedLang (change)="switchLang(selectedLang.value)">
+    <option *ngFor="let language of translate.getLangs()" [value]="language"
+        [selected]="language === translate.currentLang">
+        {{ language }}
+    </option>
+</select>
+
 <div class="container">
     <div class="row">
         <div class="col-sm-2">&nbsp;</div>
-        <div class="col-sm-6 d-flex justify-content-center"><h1>Rent A Sport Field</h1></div>
-        <div class="col-sm-2"><a routerLink="/login"><button type="button" class="btn btn-success">Log In</button></a></div>
-        <div class="col-sm-2"><a routerLink="/register"><button type="button" class="btn btn-info">Registruj se</button></a></div>
+        <div class="col-sm-6 d-flex justify-content-center">
+            <h1>Rent A Sport Field</h1>
+        </div>
+        <div class="col-sm-2"><a routerLink="/login"><button type="button" class="btn btn-success">Log In</button></a>
+        </div>
+        <div class="col-sm-2"><a routerLink="/register"><button type="button"
+                    class="btn btn-info">{{'register'|translate}}</button></a></div>
     </div>
     <div class="row">
         <div class="col-sm-12">&nbsp;</div>
     </div>
     <div class="row">
-        <div class="col-sm-12 d-flex justify-content-center"><h2>Log in</h2></div>
+        <div class="col-sm-12 d-flex justify-content-center">
+            <h2>Log in</h2>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-12 d-flex justify-content-center">
             <table>
                 <tr>
-                    <td>Korisnicko ime:</td>
+                    <td>{{'username'|translate}}:</td>
                     <td><input type="text" name="korime" [(ngModel)]="korime"></td>
                 </tr>
                 <tr>
-                    <td>Lozinka:</td>
+                    <td>{{'password'|translate}}:</td>
                     <td><input type="password" name="lozinka" [(ngModel)]="password"></td>
                 </tr>
                 <tr>

@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Booking } from 'src/models/booking';
 import { BookingService } from '../booking.service';
-
+import jsPDF from 'jspdf';
+import { UserService } from '../user.service';
+import { User } from 'src/models/user';
+import { SportObjectService } from '../sport-object.service';
+import { SportObject } from 'src/models/sportobject';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-rekreativac',
   templateUrl: './rekreativac.component.html',
@@ -10,17 +15,32 @@ import { BookingService } from '../booking.service';
 })
 export class RekreativacComponent implements OnInit {
 
-  constructor(private r: Router, private bos: BookingService) { }
+  constructor(private r: Router, private sos: SportObjectService, private bos: BookingService, private user: UserService, public translate: TranslateService) {
+    translate.setDefaultLang("sr-lat")
+    if (sessionStorage.getItem("lang") == null)
+      translate.use('sr-lat')
+    else
+      translate.use(sessionStorage.getItem("lang"))
+    translate.addLangs(["sr-lat", "sr-cyr", "en"])
+  }
+  switchLang(lang: string): void {
+    this.translate.use(lang);
+    sessionStorage.setItem("lang", lang)
+  }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('user') == null) {
       alert("You did not log in");
       return;
     }
+    this.user.getUsePerUsername(sessionStorage.getItem('user')).subscribe((data: User) => {
+      this.u = data;
+    })
     this.bos.getAllTermin().subscribe((data: Booking[]) => {
       this.bookings = data;
     })
   }
+  u: User;
   naziv: string;
   kategorija: string;
   date: string;
@@ -30,12 +50,16 @@ export class RekreativacComponent implements OnInit {
 
   bookings: Booking[] = [];
   filter(): void {
-    let sati = parseInt(this.timeoff.split(':')[0]) * 60
-    let minutiod = parseInt(this.timeoff.split(':')[1])
-    let ukupnood = sati + minutiod;
-    let satido = parseInt(this.timeto.split(':')[0]) * 60
-    let minutido = parseInt(this.timeto.split(':')[1])
-    let ukupnodo = satido + minutido
+    if (this.timeoff) {
+      let sati = parseInt(this.timeoff.split(':')[0]) * 60
+      let minutiod = parseInt(this.timeoff.split(':')[1])
+      var ukupnood = sati + minutiod;
+    }
+    if (this.timeto) {
+      let satido = parseInt(this.timeto.split(':')[0]) * 60
+      let minutido = parseInt(this.timeto.split(':')[1])
+      var ukupnodo = satido + minutido
+    }
     this.bos.getAllTermin().subscribe((data: Booking[]) => {
       this.bookings = data;
       if (this.naziv)
@@ -55,17 +79,30 @@ export class RekreativacComponent implements OnInit {
       this.clicked[idterm - 1] = false;
     else
       this.clicked[idterm - 1] = true;
+
   }
-  brOsoba:number;
-  book:Booking;
-  reserve(idterm:number): void{
-    this.bos.getInfoByIdTerm(idterm).subscribe((data:Booking)=>{
-      this.book=data;
-      if((this.book.capacity-this.brOsoba)>=0){
-        this.bos.update(idterm,this.book.capacity-this.brOsoba).subscribe(resp=>{
+  brOsoba: number;
+  book: Booking;
+  so: SportObject;
+  reserve(idterm: number): void {
+    this.bos.getInfoByIdTerm(idterm).subscribe((data: Booking) => {
+      this.book = data;
+
+      if ((this.book.capacity - this.brOsoba) >= 0) {
+        this.bos.update(idterm, this.book.capacity - this.brOsoba).subscribe(resp => {
           alert(resp['message'])
           location.reload()
         })
+        this.sos.getById(this.book.objekat).subscribe((data: SportObject) => {
+          this.so = data
+          this.bos.pdf(this.u.ime, this.u.email, this.u.prezime, this.book.cena * this.brOsoba, this.brOsoba, this.book.date, this.book.timeoff, this.book.timeto, this.book.naziv, this.so.email, this.so.telefon, sessionStorage.getItem('user')).subscribe(resp => {
+            alert(resp['message'])
+          })
+        })
+
+      }
+      else {
+        alert('nema mesta')
       }
     })
   }

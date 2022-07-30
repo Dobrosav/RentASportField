@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { SportObject } from 'src/models/sportobject';
 import { SportObjectService } from '../sport-object.service';
 
@@ -10,7 +11,18 @@ import { SportObjectService } from '../sport-object.service';
 })
 export class PrikazSvihObjekataComponent implements OnInit {
 
-  constructor(private s: SportObjectService, private r: Router) { }
+  constructor(private s: SportObjectService, private r: Router, public translate:TranslateService) { 
+    translate.setDefaultLang("sr-lat")
+    if (sessionStorage.getItem("lang") == null)
+      translate.use('sr-lat')
+    else
+      translate.use(sessionStorage.getItem("lang"))
+    translate.addLangs(["sr-lat", "sr-cyr", "en"])
+  }
+  switchLang(lang: string): void {
+    this.translate.use(lang);
+    sessionStorage.setItem("lang", lang)
+  }
 
   ngOnInit(): void {
     if (sessionStorage.getItem("user") == null) {

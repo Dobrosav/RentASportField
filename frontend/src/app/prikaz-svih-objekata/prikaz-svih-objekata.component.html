@@ -1,12 +1,18 @@
+<select class="lang" #selectedLang (change)="switchLang(selectedLang.value)">
+    <option *ngFor="let language of translate.getLangs()" [value]="language"
+        [selected]="language === translate.currentLang">
+        {{ language }}
+    </option>
+</select>
 {{poruka}}
-<h1>Moji objekti</h1>
+<h1>{{'title3'|translate}}</h1>
 <table>
     <tr *ngFor="let o of objekti">
         <td>{{o.naziv}}</td>
         <td>{{o.adresa}}</td>
         <td>{{o.grad}}</td>
-        <td><button class="btn btn-success" (click)="clickToInputDateInfo(o.id)">Unesi slobodne termine</button></td>
+        <td><button class="btn btn-success" (click)="clickToInputDateInfo(o.id)">{{'termini3'|translate}}</button></td>
     </tr>
 </table>
 <a routerLink="/vlasnik">Vrati se</a> <br>
-<a routerLink="/">Odjavi se</a>
+<a routerLink="/">{{'odjavi'|translate}}</a>

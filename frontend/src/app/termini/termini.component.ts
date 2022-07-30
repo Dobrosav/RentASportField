@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Booking } from 'src/models/booking';
 import { SportObject } from 'src/models/sportobject';
 import { BookingService } from '../booking.service';
@@ -11,7 +12,18 @@ import { SportObjectService } from '../sport-object.service';
 })
 export class TerminiComponent implements OnInit {
 
-  constructor(private sos: SportObjectService, private bos: BookingService) { }
+  constructor(private sos: SportObjectService, private bos: BookingService, public translate:TranslateService) { 
+    translate.setDefaultLang("sr-lat")
+    if (sessionStorage.getItem("lang") == null)
+      translate.use('sr-lat')
+    else
+      translate.use(sessionStorage.getItem("lang"))
+    translate.addLangs(["sr-lat", "sr-cyr", "en"])
+  }
+  switchLang(lang: string): void {
+    this.translate.use(lang);
+    sessionStorage.setItem("lang", lang)
+  }
 
   ngOnInit(): void {
     if (sessionStorage.getItem('user') == null) {

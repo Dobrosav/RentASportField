@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/models/user';
 import { UserService } from '../user.service';
 
@@ -10,7 +11,18 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private s: UserService, r: Router) { }
+  constructor(private s: UserService, r: Router,public translate:TranslateService) {
+    translate.setDefaultLang("sr-lat")
+    if (sessionStorage.getItem("lang") == null)
+      translate.use('sr-lat')
+    else
+      translate.use(sessionStorage.getItem("lang"))
+    translate.addLangs(["sr-lat", "sr-cyr", "en"])
+  }
+  switchLang(lang: string): void {
+    this.translate.use(lang);
+    sessionStorage.setItem("lang", lang)
+  }
 
   ngOnInit(): void {
     this.captcha = this.makeid();
