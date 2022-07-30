@@ -73,8 +73,8 @@ export class BookingController {
         const tranporter = nodemailer.createTransport({
             service: "hotmail",
             auth: {
-                user: "vlaskovicdodo98@outlook.com",
-                pass: "partizan98"
+                user: "*****",
+                pass: "*****"
             }
         })
         const email = {
