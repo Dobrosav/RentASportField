@@ -28,5 +28,14 @@
             <h3>{{'naslov'|translate}}</h3>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-sm-12">&nbsp;</div>
+    </div>
+    <div class="row" *ngFor="let o of object2">
+        <div class="col-sm-12 border border-primary">
+            <h3>{{o.naziv}}</h3>
+            <p>{{'kategorija'|translate}}:{{o.kategorija}}</p>
+            <p>{{'adresa'|translate}}: {{o.adresa}} {{'grad'|translate}}:{{o.grad}}</p>
+        </div>
+    </div>
 </div>

@@ -23,10 +23,16 @@ export class PocetnaComponent implements OnInit {
     sessionStorage.setItem("lang", lang)
   }
   objects:SportObject[]=[]
+  object2:SportObject[]=[]
   ngOnInit(): void {
       this.sos.getAllObjects().subscribe((data:SportObject[])=>{
         this.objects=data;
-        
+        let startPoz=this.objects.length-1
+        let br=5
+        while (br>0) {
+          this.object2.push(this.objects[startPoz--]);
+          br--
+        }
       })
   }
 
