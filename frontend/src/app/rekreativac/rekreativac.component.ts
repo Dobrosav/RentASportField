@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { Booking } from 'src/models/booking';
 import { BookingService } from '../booking.service';
-import jsPDF from 'jspdf';
 import { UserService } from '../user.service';
 import { User } from 'src/models/user';
 import { SportObjectService } from '../sport-object.service';
@@ -38,6 +38,9 @@ export class RekreativacComponent implements OnInit {
     })
     this.bos.getAllTermin().subscribe((data: Booking[]) => {
       this.bookings = data;
+
+      this.bookings = this.bookings.filter(b => b.capacity > 0)
+      this.bookings = this.bookings.filter(b => formatDate(b.date, 'yyyy-MM-dd', 'en_US') >= formatDate(new Date(), 'yyyy-MM-dd', 'en_US'))
     })
   }
   u: User;
@@ -47,7 +50,7 @@ export class RekreativacComponent implements OnInit {
   timeoff: string;
   timeto: string;
   clicked: boolean[] = [false];
-
+  message: string
   bookings: Booking[] = [];
   filter(): void {
     if (this.timeoff) {
@@ -62,16 +65,31 @@ export class RekreativacComponent implements OnInit {
     }
     this.bos.getAllTermin().subscribe((data: Booking[]) => {
       this.bookings = data;
-      if (this.naziv)
+      if (this.naziv) {
         this.bookings = this.bookings.filter(b => b.naziv == this.naziv)
-      if (this.kategorija)
+        this.bookings = this.bookings.filter(b => b.capacity > 0)
+        this.bookings = this.bookings.filter(b => formatDate(b.date, 'yyyy-MM-dd', 'en_US') >= formatDate(new Date(), 'yyyy-MM-dd', 'en_US'))
+      }
+      if (this.kategorija) {
         this.bookings = this.bookings.filter(b => b.kategorija == this.kategorija)
-      if (this.date)
+        this.bookings = this.bookings.filter(b => b.capacity > 0)
+        this.bookings = this.bookings.filter(b => formatDate(b.date, 'yyyy-MM-dd', 'en_US') >= formatDate(new Date(), 'yyyy-MM-dd', 'en_US'))
+      }
+      if (this.date) {
         this.bookings = this.bookings.filter(b => b.date == this.date)
-      if (this.timeoff)
+        this.bookings = this.bookings.filter(b => b.capacity > 0)
+        this.bookings = this.bookings.filter(b => formatDate(b.date, 'yyyy-MM-dd', 'en_US') >= formatDate(new Date(), 'yyyy-MM-dd', 'en_US'))
+      }
+      if (this.timeoff) {
         this.bookings = this.bookings.filter(b => (parseInt(b.timeoff.split(':')[0]) * 60 + parseInt(b.timeoff.split(':')[1])) >= ukupnood)
-      if (this.timeto)
+        this.bookings = this.bookings.filter(b => b.capacity > 0)
+        this.bookings = this.bookings.filter(b => formatDate(b.date, 'yyyy-MM-dd', 'en_US') >= formatDate(new Date(), 'yyyy-MM-dd', 'en_US'))
+      }
+      if (this.timeto) {
         this.bookings = this.bookings.filter(b => (parseInt(b.timeto.split(':')[0]) * 60 + parseInt(b.timeto.split(':')[1])) <= ukupnodo)
+        this.bookings = this.bookings.filter(b => b.capacity > 0)
+        this.bookings = this.bookings.filter(b => formatDate(b.date, 'yyyy-MM-dd', 'en_US') >= formatDate(new Date(), 'yyyy-MM-dd', 'en_US'))
+      }
     })
   }
   bookOpen(idterm: number): void {
@@ -85,9 +103,12 @@ export class RekreativacComponent implements OnInit {
   book: Booking;
   so: SportObject;
   reserve(idterm: number): void {
+    if (this.brOsoba < 1) {
+      this.message = "Niste uneli korektan broj osoba";
+      return;
+    }
     this.bos.getInfoByIdTerm(idterm).subscribe((data: Booking) => {
       this.book = data;
-
       if ((this.book.capacity - this.brOsoba) >= 0) {
         this.bos.update(idterm, this.book.capacity - this.brOsoba).subscribe(resp => {
           alert(resp['message'])
@@ -105,5 +126,10 @@ export class RekreativacComponent implements OnInit {
         alert('nema mesta')
       }
     })
+  }
+  open(objekat: number, idterm: number): void {
+    sessionStorage.setItem("objekat", objekat.toString())
+    sessionStorage.setItem("idterm", idterm.toString())
+    this.r.navigate(["/rekreativac/prikaz"])
   }
 }

@@ -31,12 +31,12 @@
     "balonzafudbal":"balloon for soccer",
     "terenzatenisotvoreni":"tennis court (open)",
     "terenzateniszatvoreni":"tennis court (closed)",
-    "karting track": "carting track",
+    "kartingstaza": "carting track",
     "terenzaodbojkunapesku":"beach volleyball court",
     "salazakosarku": "basketball hall",
     "salazaodbojku": "volleyball hall",
     "trimstazazatracanje":"trim running track",
-    "terenzasquas": "squash court",
+    "terenzaskvos": "squash court",
     "terenzaspadl":"padl terrain",
     "terenzapaintball":"paintball field",
     "adresa":"Address",
@@ -47,5 +47,7 @@
     "termini3":"Enter available dates",
     "capacity":"Capacity",
     "ter":"Enter dates",
-    "vratise":"Return back"
+    "vratise":"Return back",
+    "bst":"Book previous selected time",
+    "login":"Log In"
 }

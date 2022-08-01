@@ -2,3 +2,10 @@
     position: absolute;
     right: 1.5%;
 }
+a:visited{
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+    color: black;
+}

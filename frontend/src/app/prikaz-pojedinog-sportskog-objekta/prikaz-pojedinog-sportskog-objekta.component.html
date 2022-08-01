@@ -1,0 +1,50 @@
+<select class="lang" #selectedLang (change)="switchLang(selectedLang.value)">
+    <option *ngFor="let language of translate.getLangs()" [value]="language"
+        [selected]="language === translate.currentLang">
+        {{ language }}
+    </option>
+</select>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <h1>{{objekat.naziv}}</h1>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-sm-12">
+        {{'adresa'|translate}}: {{objekat.adresa}} mail:{{objekat.email}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+       {{'grad'|translate}}:{{objekat.grad}} {{'kategorija:'|translate}}{{objekat.kategorija}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">{{'telefon'|translate}}: {{objekat.telefon}}</div>
+    </div>
+    <div class="row">
+      <button class="btn btn-success" (click)="open()">{{'bst'|translate}}</button>
+    </div>
+    <div class="row" *ngIf="clicked"> 
+      <table>
+        <tr>
+            <td>{{'brosoba'|translate}}</td>
+            <td><input type="number"  name="brojosoba" min="1" [(ngModel)]="brOsoba"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button class="btn btn-success" (click)="reserve()">{{'rezervisi'|translate}}</button></td>
+        </tr>
+    </table>
+    </div>
+  
+    <div class="row">
+      <div class="col-sm-12"><a routerLink="/rekreativac">{{'vratise'|translate}}</a><br> <a routerLink="/">{{'odjavi'|translate}}</a></div>
+    </div>
+
+</div>
+<div class="map-container">
+  <div class="map-frame">
+    <div id="map"></div>
+  </div>
+</div>

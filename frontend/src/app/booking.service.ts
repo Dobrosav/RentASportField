@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -44,21 +44,31 @@ export class BookingService {
     }
     return this.http.post(`${this.uri}/booking/getInfoByIdTerm`, data)
   }
-  pdf(ime,emailk,prezime,cenaosoba,brojOsoba,date,vremeod,vremedo,naziv,email,telefon,user){
-    const data={
-      ime:ime,
-      emailk:emailk,
-      prezime:prezime,
-      cenaosoba:cenaosoba,
-      brojOsoba:brojOsoba,
-      date:date,
-      vremeod:vremeod,
-      vremedo:vremedo,
-      naziv:naziv,
-      email:email,
-      telefon:telefon,
-      user:user
+  pdf(ime, emailk, prezime, cenaosoba, brojOsoba, date, vremeod, vremedo, naziv, email, telefon, user) {
+    const data = {
+      ime: ime,
+      emailk: emailk,
+      prezime: prezime,
+      cenaosoba: cenaosoba,
+      brojOsoba: brojOsoba,
+      date: date,
+      vremeod: vremeod,
+      vremedo: vremedo,
+      naziv: naziv,
+      email: email,
+      telefon: telefon,
+      user: user
     }
     return this.http.post(`${this.uri}/booking/pdf`, data)
+  }
+  getCoordinates(street, city) {
+    const uri1 = "http://nominatim.openstreetmap.org/search/"
+     let query=new HttpParams()
+     let state="Serbia"
+     query=query.append("street",street)
+     query=query.append("city",city)
+     query=query.append("state",state)
+     query=query.append("format","json")
+     return this.http.get(uri1,{params:query})
   }
 }

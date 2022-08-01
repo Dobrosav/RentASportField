@@ -16,6 +16,7 @@ import { PrikazSvihObjekataComponent } from './prikaz-svih-objekata/prikaz-svih-
 import { TerminiComponent } from './termini/termini.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { PrikazPojedinogSportskogObjektaComponent } from './prikaz-pojedinog-sportskog-objekta/prikaz-pojedinog-sportskog-objekta.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     RekreativacComponent,
     VlasnikComponent,
     PrikazSvihObjekataComponent,
-    TerminiComponent
+    TerminiComponent,
+    PrikazPojedinogSportskogObjektaComponent
   ],
   imports: [
     BrowserModule,

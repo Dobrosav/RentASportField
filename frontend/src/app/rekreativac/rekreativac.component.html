@@ -42,7 +42,7 @@
         {{'kapacitet'|translate}}:{{b.capacity}} {{'cena'|translate}}:{{b.cena}} <br>
         {{'datum'|translate}}: {{b.date}} <br>
         {{'time'|translate}}: {{b.timeoff}}-{{b.timeto}} <br>
-        <button class="btn btn-success" (click)="bookOpen(b.idterm)">{{'rezervisi'|translate}}</button> <button class="btn btn-info">{{'infoobjekat'|translate}}</button>
+        <button class="btn btn-success" (click)="bookOpen(b.idterm)">{{'rezervisi'|translate}}</button> <button (click)="open(b.objekat, b.idterm)" class="btn btn-info">{{'infoobjekat'|translate}}</button>
     </div>
     <div class="col-sm-6" *ngIf="clicked[b.idterm-1]">
         <table>
@@ -54,6 +54,7 @@
                 <td colspan="2"><button class="btn btn-success" (click)="reserve(b.idterm)">{{'rezervisi'|translate}}</button></td>
             </tr>
         </table>
+        {{message}}
     </div>
 </div>
 </div>
