@@ -52,12 +52,12 @@ export class VlasnikComponent implements OnInit {
     this.max = max;
   }
   check(): boolean {
-    if (this.naziv.length > 3 && this.kategorija != "" && this.adresa.length > 10 && this.grad.length > 2 && this.email.length > 10 && this.telefon.length > 5)
+    if (this.naziv.length > 3 && this.kategorija && this.adresa.length > 5 && this.grad.length > 2 && this.email.length > 10 && this.telefon.length > 5)
       return true;
     return false;
   }
   dodajObjekat(): void {
-    if (!this.check()) {
+    if (this.check()==false) {
       this.poruka = "bad data!";
       return;
     }

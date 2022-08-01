@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { SportObject } from 'src/models/sportobject';
+import { SportObjectService } from '../sport-object.service';
 
 @Component({
   selector: 'app-pocetna',
@@ -8,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class PocetnaComponent implements OnInit {
 
-  constructor(public translate: TranslateService) {
+  constructor(public translate: TranslateService, private sos:SportObjectService) {
     translate.setDefaultLang("sr-lat")
     if (sessionStorage.getItem("lang") == null)
       translate.use('sr-lat')
@@ -20,8 +22,12 @@ export class PocetnaComponent implements OnInit {
     this.translate.use(lang);
     sessionStorage.setItem("lang", lang)
   }
+  objects:SportObject[]=[]
   ngOnInit(): void {
-
+      this.sos.getAllObjects().subscribe((data:SportObject[])=>{
+        this.objects=data;
+        
+      })
   }
 
 }
