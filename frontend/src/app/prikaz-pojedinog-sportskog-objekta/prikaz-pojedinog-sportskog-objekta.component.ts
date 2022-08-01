@@ -78,9 +78,14 @@ export class PrikazPojedinogSportskogObjektaComponent implements OnInit {
     else
       this.clicked = true
   }
+  message:string;
   u:User;
   book:Booking;
   reserve(): void {
+    if (this.brOsoba < 1) {
+      this.message = "Niste uneli korektan broj osoba";
+      return;
+    }
     this.bos.getInfoByIdTerm(sessionStorage.getItem('idterm')).subscribe((data: Booking) => {
       this.book = data;
 
