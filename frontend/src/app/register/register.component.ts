@@ -11,7 +11,7 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private s: UserService, r: Router,public translate:TranslateService) {
+  constructor(private s: UserService, r: Router, public translate: TranslateService) {
     translate.setDefaultLang("sr-lat")
     if (sessionStorage.getItem("lang") == null)
       translate.use('sr-lat')
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
     return this.lozinka == this.lozinkap;
   }
   checkImePrezimeIgrad(): boolean {
-    if (this.ime.length > 3 && this.prezime.length > 3 && this.grad.length > 3 && this.korime.length > 3 && this.email.length > 5 && this.telefon.length > 6 && this.telefon.length<10)
+    if (this.ime.length > 3 && this.prezime.length > 3 && this.grad.length > 3 && this.korime.length > 3 && this.email.length > 5 && this.telefon.length > 6 && this.telefon.length < 10)
       return true
     return false
   }
@@ -81,10 +81,10 @@ export class RegisterComponent implements OnInit {
     return false;
   }
   register(): void {
-    if (this.checkUserExist()) {
-      this.message = "Postoji korime ili emali adresa probajte sa drugim podacima"
-      return;
-    }
+    /* if (this.checkUserExist()) {
+       this.message = "Postoji korime ili emali adresa probajte sa drugim podacima"
+       return;
+     }*/
     if (!this.validateMail()) {
       this.message = "Mail nije validan"
       return;
@@ -110,14 +110,22 @@ export class RegisterComponent implements OnInit {
       valid = true;
     else
       valid = false
-    this.s.register(this.ime, this.prezime, this.korime, this.lozinka, this.grad, this.datumRodjenja, this.email, this.telefon, this.tip, valid).subscribe((resp) => {
-      if (resp['message'] == 'user added') {
-        alert("OK")
-        location.reload()
-      } else {
-        alert("ERROR")
+    this.s.getUsers().subscribe((data: User[]) => {
+      this.users = data
+      let u: User = this.users.filter(a => a.korime == this.korime || a.email == this.email)[0]
+      if (u) {
+        this.message = "Postoji korime ili emali adresa probajte sa drugim podacima"
+        return;
       }
-      this.message = "";
+      this.s.register(this.ime, this.prezime, this.korime, this.lozinka, this.grad, this.datumRodjenja, this.email, this.telefon, this.tip, valid).subscribe((resp) => {
+        if (resp['message'] == 'user added') {
+          alert("OK")
+          location.reload()
+        } else {
+          alert("ERROR")
+        }
+        this.message = "";
+      })
     })
   }
 }

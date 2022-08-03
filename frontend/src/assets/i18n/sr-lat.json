@@ -49,5 +49,9 @@
     "ter":"Unesi termin",
     "vratise":"vrati se",
     "bst":"Rezerviši prethodno izabrani termin",
-    "login":"Log In"
+    "login":"Log In",
+    "obrisi":"Obriši",
+    "stara":"Stara lozinka",
+    "nova":"Nova lozinka",
+    "change":"Promeni lozinku"
 }

@@ -49,5 +49,9 @@
     "ter":"Enter dates",
     "vratise":"Return back",
     "bst":"Book previous selected time",
-    "login":"Log In"
+    "login":"Log In",
+    "obrisi":"Delete",
+    "stara":"Old password",
+    "nova":"New password",
+    "change":"Change password"
 }

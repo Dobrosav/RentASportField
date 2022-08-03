@@ -42,7 +42,9 @@ export class RekreativacComponent implements OnInit {
       this.bookings = this.bookings.filter(b => b.capacity > 0)
       this.bookings = this.bookings.filter(b => formatDate(b.date, 'yyyy-MM-dd', 'en_US') >= formatDate(new Date(), 'yyyy-MM-dd', 'en_US'))
     })
+    this.link = this.r.url;
   }
+  link:string
   u: User;
   naziv: string;
   kategorija: string;

@@ -11,7 +11,7 @@ import { SportObjectService } from '../sport-object.service';
 })
 export class PrikazSvihObjekataComponent implements OnInit {
 
-  constructor(private s: SportObjectService, private r: Router, public translate:TranslateService) { 
+  constructor(private s: SportObjectService, private r: Router, public translate: TranslateService) {
     translate.setDefaultLang("sr-lat")
     if (sessionStorage.getItem("lang") == null)
       translate.use('sr-lat')
@@ -40,5 +40,11 @@ export class PrikazSvihObjekataComponent implements OnInit {
   clickToInputDateInfo(id: number): void {
     sessionStorage.setItem('objekat', id.toString());
     this.r.navigate(["/vlasnik/termini/datumi"]);
+  }
+  delete(id: number): void {
+    this.s.delete(id).subscribe(resp => {
+      alert(resp['message'])
+      location.reload()
+    })
   }
 }

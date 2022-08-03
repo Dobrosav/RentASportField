@@ -62,7 +62,6 @@ export class UserControler {
             }
         })
     }
-
     changePassword = (req: express.Request, res: express.Response) => {
         let korime = req.body.korime
         let password = req.body.lozinka

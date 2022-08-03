@@ -32,4 +32,18 @@ export class SportObjectController {
 
         })
     }
+    delete=(req:express.Request, res: express.Response)=>{
+        let id=req.body.id
+        SportObject.findOne({'id':parseInt(id)},(err, so)=>{
+            if(err) console.error(err);
+            else{
+                if(so){
+                    SportObject.collection.deleteOne({'id':parseInt(id)});
+                    res.json({'message':'ok'})
+                }
+                else
+                res.json({'message':'error'})
+            }
+        })
+    }
 }

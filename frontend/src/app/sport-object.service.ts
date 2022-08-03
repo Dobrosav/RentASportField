@@ -36,4 +36,10 @@ export class SportObjectService {
     }
     return this.http.post(`${this.uri}/sportObject/getById`,data)
   }
+  delete(id){
+    const data={
+      id:id
+    }
+    return this.http.post(`${this.uri}/sportObject/delete`,data)
+  }
 }

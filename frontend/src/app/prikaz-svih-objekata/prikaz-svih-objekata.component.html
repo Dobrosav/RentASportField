@@ -12,6 +12,7 @@
         <td>{{o.adresa}}</td>
         <td>{{o.grad}}</td>
         <td><button class="btn btn-success" (click)="clickToInputDateInfo(o.id)">{{'termini3'|translate}}</button></td>
+        <td><button class="btn btn-danger" (click)="delete(o.id)">{{'obrisi'|translate}}</button></td>
     </tr>
 </table>
 <a routerLink="/vlasnik">Vrati se</a> <br>

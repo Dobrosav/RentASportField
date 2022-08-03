@@ -17,6 +17,7 @@ import { TerminiComponent } from './termini/termini.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PrikazPojedinogSportskogObjektaComponent } from './prikaz-pojedinog-sportskog-objekta/prikaz-pojedinog-sportskog-objekta.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { PrikazPojedinogSportskogObjektaComponent } from './prikaz-pojedinog-spo
     VlasnikComponent,
     PrikazSvihObjekataComponent,
     TerminiComponent,
-    PrikazPojedinogSportskogObjektaComponent
+    PrikazPojedinogSportskogObjektaComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

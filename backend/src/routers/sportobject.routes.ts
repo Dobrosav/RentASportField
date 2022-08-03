@@ -13,4 +13,7 @@ sportObjectRouter.route("/getAllObjectsOfOwner").post(
 sportObjectRouter.route("/getById").post(
     (req,res)=> new SportObjectController().getById(req,res)
 )
+sportObjectRouter.route("/delete").post(
+    (req, res)=>new SportObjectController().delete(req,res)
+)
 export default sportObjectRouter
