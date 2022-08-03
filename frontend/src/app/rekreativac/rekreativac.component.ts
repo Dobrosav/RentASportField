@@ -63,6 +63,12 @@ export class RekreativacComponent implements OnInit {
       let minutido = parseInt(this.timeto.split(':')[1])
       var ukupnodo = satido + minutido
     }
+    if (ukupnodo && ukupnood) {
+      if (ukupnodo < ukupnood) {
+        alert("Nije dobro vreme")
+        return;
+      }
+    }
     this.bos.getAllTermin().subscribe((data: Booking[]) => {
       this.bookings = data;
       if (this.naziv) {

@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
     return this.lozinka == this.lozinkap;
   }
   checkImePrezimeIgrad(): boolean {
-    if (this.ime.length > 3 && this.prezime.length > 3 && this.grad.length > 3 && this.korime.length > 3 && this.email.length > 5 && this.telefon.length > 6)
+    if (this.ime.length > 3 && this.prezime.length > 3 && this.grad.length > 3 && this.korime.length > 3 && this.email.length > 5 && this.telefon.length > 6 && this.telefon.length<10)
       return true
     return false
   }
