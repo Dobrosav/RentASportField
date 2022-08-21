@@ -44,7 +44,7 @@ export class BookingService {
     }
     return this.http.post(`${this.uri}/booking/getInfoByIdTerm`, data)
   }
-  pdf(ime, emailk, prezime, cenaosoba, brojOsoba, date, vremeod, vremedo, naziv, email, telefon, user) {
+  pdf(ime, emailk, prezime, cenaosoba, brojOsoba, date, vremeod, vremedo, naziv, email, telefon, user, lang) {
     const data = {
       ime: ime,
       emailk: emailk,
@@ -57,7 +57,8 @@ export class BookingService {
       naziv: naziv,
       email: email,
       telefon: telefon,
-      user: user
+      user: user,
+      lang:lang
     }
     return this.http.post(`${this.uri}/booking/pdf`, data)
   }

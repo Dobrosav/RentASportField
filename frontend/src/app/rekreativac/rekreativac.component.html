@@ -1,41 +1,51 @@
-<select class="lang" #selectedLang (change)="switchLang(selectedLang.value)">
-    <option *ngFor="let language of translate.getLangs()" [value]="language"
-        [selected]="language === translate.currentLang">
-        {{ language }}
-    </option>
-</select>
-<table>
-    <tr>
-        <td>{{'naziv'|translate}}:</td>
-        <td><input type="text" name="naziv" [(ngModel)]="naziv"></td>
-        <td>{{'kategorija'|translate}}:</td>
-                    <td>
-                        <select name="kategorija" [(ngModel)]="kategorija">
-                            <option value="" selected></option>
-                            <option value="balon za fudbal">{{'balonzafudbal'|translate}}</option>
-                            <option value="teren za tenis (otvoreni)">{{'terenzatenisotvoreni'|translate}}</option>
-                            <option value="teren za tenis (zatvoreni)">{{'terenzateniszatvoreni'|translate}}</option>
-                            <option value="karting staza">{{'kartingstaza'|translate}}</option>
-                            <option value="teren za odbojku na pesku">{{'terenzaodbojkunapesku'|translate}}</option>
-                            <option value="sala za kosarku">{{'salazakosarku'|translate}}</option>
-                            <option value="sala za odbojku">{{'salazaodbojku'|translate}}</option>
-                            <option value="trim staza za trcanje">{{'trimstazazatrcanje'|translate}}</option>
-                            <option value="teren za skvos">{{'terenzaskvos'|translate}}</option>
-                            <option value="teren za padl">{{'terenzapadl'|translate}}</option>
-                            <option value="teren za paintball">{{'terenzapaintball'|translate}}</option>
-                        </select>
-                    </td>
-        <td>{{'datum'|translate}}:</td>
-        <td><input type="date" name="date" [(ngModel)]="date"></td>
-        <td>{{'vremeod'|translate}}:</td>
-        <td><input type="time" name="timeoff" [(ngModel)]="timeoff"></td>
-        <td>{{'vremedo'|translate}}:</td>
-        <td><input type="time" name="timeto" [(ngModel)]="timeto"></td>
-        <td><button (click)="filter()" class="btn btn-success">{{'filtriraj'|translate}}</button></td>
-    </tr>
-</table>
+<ul>
+    <li> <font color="white">{{'Korisnik'|translate}}:{{u.ime}} {{u.prezime}}</font></li>
+    <li><a routerLink="{{link}}/changePassword">{{'change'|translate}}</a></li>
+    <li><a class="logout" routerLink="/">{{'odjavi'|translate}}</a></li>
+    <li style="float: right;"><select #selectedLang (change)="switchLang(selectedLang.value)">
+        <option *ngFor="let language of translate.getLangs()" [value]="language"
+            [selected]="language === translate.currentLang">
+            {{ language }}
+        </option>
+    </select></li>
+  </ul>
+
 <div class="container">
-<div class="row" *ngFor="let b of bookings">
+    <div class="row">
+        <div class="col-sm-12">
+            <table>
+                <tr>
+                    <td>{{'naziv'|translate}}:</td>
+                    <td><input type="text" name="naziv" [(ngModel)]="naziv"></td>
+                    <td>{{'kategorija'|translate}}:</td>
+                                <td>
+                                    <select name="kategorija" [(ngModel)]="kategorija">
+                                        <option value="" selected></option>
+                                        <option value="balon za fudbal">{{'balonzafudbal'|translate}}</option>
+                                        <option value="teren za tenis (otvoreni)">{{'terenzatenisotvoreni'|translate}}</option>
+                                        <option value="teren za tenis (zatvoreni)">{{'terenzateniszatvoreni'|translate}}</option>
+                                        <option value="karting staza">{{'kartingstaza'|translate}}</option>
+                                        <option value="teren za odbojku na pesku">{{'terenzaodbojkunapesku'|translate}}</option>
+                                        <option value="sala za kosarku">{{'salazakosarku'|translate}}</option>
+                                        <option value="sala za odbojku">{{'salazaodbojku'|translate}}</option>
+                                        <option value="trim staza za trcanje">{{'trimstazazatrcanje'|translate}}</option>
+                                        <option value="teren za skvos">{{'terenzaskvos'|translate}}</option>
+                                        <option value="teren za padl">{{'terenzapadl'|translate}}</option>
+                                        <option value="teren za paintball">{{'terenzapaintball'|translate}}</option>
+                                    </select>
+                                </td>
+                    <td>{{'datum'|translate}}:</td>
+                    <td><input type="date" name="date" [(ngModel)]="date"></td>
+                    <td>{{'vremeod'|translate}}:</td>
+                    <td><input type="time" name="timeoff" [(ngModel)]="timeoff"></td>
+                    <td>{{'vremedo'|translate}}:</td>
+                    <td><input type="time" name="timeto" [(ngModel)]="timeto"></td>
+                    <td><button (click)="filter()" class="btn btn-success">{{'filtriraj'|translate}}</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row" *ngFor="let b of bookings">
     <div class="col-sm-6 border border-primary">
         <h3>{{b.naziv}} </h3>
         <h4>{{b.kategorija}}</h4>
@@ -58,5 +68,3 @@
     </div>
 </div>
 </div>
-<a routerLink="{{link}}/changePassword">{{'change'|translate}}</a> <br>
-<a routerLink="/">{{'odjavi'|translate}}</a>

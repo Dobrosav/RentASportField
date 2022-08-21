@@ -1,12 +1,25 @@
-<select class="lang" #selectedLang (change)="switchLang(selectedLang.value)">
-    <option *ngFor="let language of translate.getLangs()" [value]="language"
-        [selected]="language === translate.currentLang">
-        {{ language }}
-    </option>
-</select>
+<ul>
+    <li> <font color="white">{{'Korisnik'|translate}}:{{u.ime}} {{u.prezime}}</font></li>
+    <li><a routerLink="/vlasnik">{{'vratise'|translate}}</a></li>
+    <li><a class="logout" routerLink="/">{{'odjavi'|translate}}</a></li>
+    <li style="float: right;"><select #selectedLang (change)="switchLang(selectedLang.value)">
+        <option *ngFor="let language of translate.getLangs()" [value]="language"
+            [selected]="language === translate.currentLang">
+            {{ language }}
+        </option>
+    </select></li>
+</ul>
+
 {{poruka}}
 <h1>{{'title3'|translate}}</h1>
-<table>
+<br>
+<table [cellPadding]="3" [cellSpacing]="3">
+    <thead>
+        <th>{{'naziv'|translate}}</th>
+        <th>{{'adresa'|translate}}</th>
+        <th>{{'grad'|translate}}</th>
+        <th colspan="2">{{'Akcija'|translate}}</th>
+    </thead>
     <tr *ngFor="let o of objekti">
         <td>{{o.naziv}}</td>
         <td>{{o.adresa}}</td>
@@ -15,5 +28,4 @@
         <td><button class="btn btn-danger" (click)="delete(o.id)">{{'obrisi'|translate}}</button></td>
     </tr>
 </table>
-<a routerLink="/vlasnik">Vrati se</a> <br>
-<a routerLink="/">{{'odjavi'|translate}}</a>
+ <br>

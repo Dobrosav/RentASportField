@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Booking } from 'src/models/booking';
 import { SportObject } from 'src/models/sportobject';
+import { User } from 'src/models/user';
 import { BookingService } from '../booking.service';
 import { SportObjectService } from '../sport-object.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-termini',
@@ -12,7 +14,7 @@ import { SportObjectService } from '../sport-object.service';
 })
 export class TerminiComponent implements OnInit {
 
-  constructor(private sos: SportObjectService, private bos: BookingService, public translate:TranslateService) { 
+  constructor(private sos: SportObjectService, private bos: BookingService, private us: UserService, public translate: TranslateService) {
     translate.setDefaultLang("sr-lat")
     if (sessionStorage.getItem("lang") == null)
       translate.use('sr-lat')
@@ -30,6 +32,9 @@ export class TerminiComponent implements OnInit {
       alert("You did not log in")
       return;
     }
+    this.us.getUsePerUsername(sessionStorage.getItem("user")).subscribe((u: User) => {
+      this.u = u;
+    })
     this.sos.getById(parseInt(sessionStorage.getItem('objekat'))).subscribe((o: SportObject) => {
       this.objekat = o;
     })
@@ -43,6 +48,7 @@ export class TerminiComponent implements OnInit {
     this.max = max;
   }
   max: number;
+  u: User;
   objekat: SportObject
   date: Date;
   timeoff: string;

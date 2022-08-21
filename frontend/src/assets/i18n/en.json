@@ -6,6 +6,7 @@
     "username":"Username",
     "password":"Password",
     "ime":"Name",
+    "email":"E-mail",
     "prezime":"Surname",
     "lozinka-ponovo":"Repeat password",
     "grad":"City",
@@ -53,5 +54,7 @@
     "obrisi":"Delete",
     "stara":"Old password",
     "nova":"New password",
-    "change":"Change password"
+    "change":"Change password",
+    "Akcija":"Action",
+    "Korisnik":"User"
 }

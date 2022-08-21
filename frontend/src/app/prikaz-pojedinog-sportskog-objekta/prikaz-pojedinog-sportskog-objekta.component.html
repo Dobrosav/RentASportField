@@ -1,9 +1,14 @@
-<select class="lang" #selectedLang (change)="switchLang(selectedLang.value)">
-    <option *ngFor="let language of translate.getLangs()" [value]="language"
-        [selected]="language === translate.currentLang">
-        {{ language }}
-    </option>
-</select>
+<ul>
+  <li> <font color="white">{{'Korisnik'|translate}}:{{u.ime}} {{u.prezime}}</font></li>
+  <li><a routerLink="/rekreativac">{{'vratise'|translate}}</a></li>
+  <li><a class="logout" routerLink="/">{{'odjavi'|translate}}</a></li>
+  <li style="float: right;"><select #selectedLang (change)="switchLang(selectedLang.value)">
+      <option *ngFor="let language of translate.getLangs()" [value]="language"
+          [selected]="language === translate.currentLang">
+          {{ language }}
+      </option>
+  </select></li>
+</ul>
 <div class="container">
   <div class="row">
     <div class="col-sm-12">

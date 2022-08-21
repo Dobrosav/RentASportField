@@ -124,7 +124,7 @@ export class RekreativacComponent implements OnInit {
         })
         this.sos.getById(this.book.objekat).subscribe((data: SportObject) => {
           this.so = data
-          this.bos.pdf(this.u.ime, this.u.email, this.u.prezime, this.book.cena * this.brOsoba, this.brOsoba, this.book.date, this.book.timeoff, this.book.timeto, this.book.naziv, this.so.email, this.so.telefon, sessionStorage.getItem('user')).subscribe(resp => {
+          this.bos.pdf(this.u.ime, this.u.email, this.u.prezime, this.book.cena * this.brOsoba, this.brOsoba, this.book.date, this.book.timeoff, this.book.timeto, this.book.naziv, this.so.email, this.so.telefon, sessionStorage.getItem('user'),sessionStorage.getItem("lang")).subscribe(resp => {
             alert(resp['message'])
             this.r.navigate(["/rekreativac"])
           })

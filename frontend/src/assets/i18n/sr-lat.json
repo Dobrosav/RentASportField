@@ -7,6 +7,7 @@
     "password":"Lozinka",
     "ime":"Ime",
     "prezime":"Prezime",
+    "email":"E-mail",
     "lozinka-ponovo":"Lozinka ponovo",
     "grad":"Grad",
     "datum-rodjenja":"Datum rođenja",
@@ -53,5 +54,7 @@
     "obrisi":"Obriši",
     "stara":"Stara lozinka",
     "nova":"Nova lozinka",
-    "change":"Promeni lozinku"
+    "change":"Promeni lozinku",
+    "Akcija":"Akcija",
+    "Korisnik":"Korisnik"
 }

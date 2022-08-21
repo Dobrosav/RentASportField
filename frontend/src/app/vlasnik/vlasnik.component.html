@@ -1,9 +1,15 @@
-<select class="lang" #selectedLang (change)="switchLang(selectedLang.value)">
-    <option *ngFor="let language of translate.getLangs()" [value]="language"
-        [selected]="language === translate.currentLang">
-        {{ language }}
-    </option>
-</select>
+<ul>
+    <li> <font color="white">{{'Korisnik'|translate}}:{{u.ime}} {{u.prezime}}</font></li>
+    <li><a routerLink="{{link}}/termini">{{'termini'|translate}}</a></li>
+    <li><a routerLink="{{link}}/changePassword">{{'change'|translate}}</a></li>
+    <li><a class="logout" routerLink="/">{{'odjavi'|translate}}</a></li>
+    <li style="float: right;"><select #selectedLang (change)="switchLang(selectedLang.value)">
+        <option *ngFor="let language of translate.getLangs()" [value]="language"
+            [selected]="language === translate.currentLang">
+            {{ language }}
+        </option>
+    </select></li>
+  </ul>
 <h1>{{'dodajObjekat'|translate}}</h1>
 <div class="container">
     <div class="row">
@@ -56,6 +62,3 @@
         </div>
     </div>
 </div>
-<a routerLink="/">{{'odjavi'|translate}}</a><br>
-<a routerLink="{{link}}/termini">{{'termini'|translate}}</a><br>
-<a routerLink="{{link}}/changePassword">{{'change'|translate}}</a>

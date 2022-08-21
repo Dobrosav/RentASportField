@@ -96,7 +96,7 @@ export class PrikazPojedinogSportskogObjektaComponent implements OnInit {
         })
         this.sos.getById(this.book.objekat).subscribe((data: SportObject) => {
           this.objekat = data
-          this.bos.pdf(this.u.ime, this.u.email, this.u.prezime, this.book.cena * this.brOsoba, this.brOsoba, this.book.date, this.book.timeoff, this.book.timeto, this.book.naziv, this.objekat.email, this.objekat.telefon, sessionStorage.getItem('user')).subscribe(resp => {
+          this.bos.pdf(this.u.ime, this.u.email, this.u.prezime, this.book.cena * this.brOsoba, this.brOsoba, this.book.date, this.book.timeoff, this.book.timeto, this.book.naziv, this.objekat.email, this.objekat.telefon, sessionStorage.getItem('user'),sessionStorage.getItem("lang")).subscribe(resp => {
             alert(resp['message'])
           })
         })

@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SportObject } from 'src/models/sportobject';
+import { User } from 'src/models/user';
 import { SportObjectService } from '../sport-object.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-prikaz-svih-objekata',
@@ -11,7 +13,7 @@ import { SportObjectService } from '../sport-object.service';
 })
 export class PrikazSvihObjekataComponent implements OnInit {
 
-  constructor(private s: SportObjectService, private r: Router, public translate: TranslateService) {
+  constructor(private s: SportObjectService, private us:UserService, private r: Router, public translate: TranslateService) {
     translate.setDefaultLang("sr-lat")
     if (sessionStorage.getItem("lang") == null)
       translate.use('sr-lat')
@@ -29,13 +31,18 @@ export class PrikazSvihObjekataComponent implements OnInit {
       this.poruka = "You did not log in";
       return;
     }
+    
     this.user = sessionStorage.getItem("user");
+    this.us.getUsePerUsername(this.user).subscribe((u:User)=>{
+      this.u=u;
+    })
     this.s.getAllObjectsOfOwner(this.user).subscribe((obj: SportObject[]) => {
       this.objekti = obj;
     })
   }
   poruka: string;
   user: string;
+  u:User;
   objekti: SportObject[] = [];
   clickToInputDateInfo(id: number): void {
     sessionStorage.setItem('objekat', id.toString());

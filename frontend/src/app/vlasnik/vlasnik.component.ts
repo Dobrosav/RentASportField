@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SportObject } from 'src/models/sportobject';
+import { User } from 'src/models/user';
 import { SportObjectService } from '../sport-object.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-vlasnik',
@@ -11,7 +13,7 @@ import { SportObjectService } from '../sport-object.service';
 })
 export class VlasnikComponent implements OnInit {
 
-  constructor(private s: SportObjectService, private r:Router, public translate:TranslateService) { 
+  constructor(private s: SportObjectService, private r: Router, private us: UserService, public translate: TranslateService) {
     translate.setDefaultLang("sr-lat")
     if (sessionStorage.getItem("lang") == null)
       translate.use('sr-lat')
@@ -25,14 +27,18 @@ export class VlasnikComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(sessionStorage.getItem("user")==null){
+    if (sessionStorage.getItem("user") == null) {
       alert("You did not log in");
       return;
     }
+    this.us.getUsePerUsername(sessionStorage.getItem("user")).subscribe((u: User) => {
+      this.u = u;
+    })
     this.link = this.r.url;
     this.korime = sessionStorage.getItem("user");
   }
-  link:string;
+  u: User
+  link: string;
   naziv: string;
   kategorija: string;
   adresa: string;
@@ -57,7 +63,7 @@ export class VlasnikComponent implements OnInit {
     return false;
   }
   dodajObjekat(): void {
-    if (this.check()==false) {
+    if (this.check() == false) {
       this.poruka = "bad data!";
       return;
     }
