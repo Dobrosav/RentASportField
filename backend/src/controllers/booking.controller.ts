@@ -60,6 +60,11 @@ export class BookingController {
         let telefon = req.body.telefon
         let user = req.body.user
         let mailk = req.body.emailk
+        let lang=req.body.lang
+        if(lang=="en")
+            var textm="Dear Sir/Madam \n Attached is a pre-calculation \n Best regards"
+        else
+            textm="Postovani/a \n U prilogu se nalazi predracun  \n Srdacan pozdrav"
         let nazivpdf = "predracun" + user + ".pdf"
         var pdf = new jsPDF()
         pdf.text("PODACI O UPLATIOCU", 10, 10);
@@ -73,15 +78,15 @@ export class BookingController {
         const tranporter = nodemailer.createTransport({
             service: "hotmail",
             auth: {
-                user: "*****",
-                pass: "*****"
+                user: "****",
+                pass: "****"
             }
         })
         const email = {
             from: "vlaskovicdodo98@outlook.com",
             to: mailk,
             subject: "Predracun za sportski objekat",
-            text: "Postovani/a \n U prilogu se nalazi predracun  \n Srdacan pozdrav",
+            text: textm,
             attachments: [{
                 filename: nazivpdf,
                 path: './'+nazivpdf,

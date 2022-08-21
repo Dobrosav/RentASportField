@@ -65,7 +65,6 @@ export class UserControler {
     changePassword = (req: express.Request, res: express.Response) => {
         let korime = req.body.korime
         let password = req.body.lozinka
-        console.log(korime + " " + password)
         User.findOne({ "korime": korime }, (err, users) => {
             if (err) console.log(err)
             else {
