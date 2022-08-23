@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SportObject } from 'src/models/sportobject';
 import { User } from 'src/models/user';
+import Swal from 'sweetalert2';
 import { SportObjectService } from '../sport-object.service';
 import { UserService } from '../user.service';
 
@@ -50,8 +51,15 @@ export class PrikazSvihObjekataComponent implements OnInit {
   }
   delete(id: number): void {
     this.s.delete(id).subscribe(resp => {
-      alert(resp['message'])
-      location.reload()
+      Swal.fire({
+        title:"deleted successFully",
+        text:resp['message']+" deleted successFully",
+        icon:"success",
+        timer:2000,
+        showConfirmButton:false
+      }).then(()=>{
+        location.reload()
+      })
     })
   }
 }

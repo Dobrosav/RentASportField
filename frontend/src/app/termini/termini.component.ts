@@ -1,8 +1,10 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Booking } from 'src/models/booking';
 import { SportObject } from 'src/models/sportobject';
 import { User } from 'src/models/user';
+import Swal from 'sweetalert2';
 import { BookingService } from '../booking.service';
 import { SportObjectService } from '../sport-object.service';
 import { UserService } from '../user.service';
@@ -55,17 +57,61 @@ export class TerminiComponent implements OnInit {
   timeto: string;
   capacity: number;
   cena: number;
+  message: string;
   bookings: Booking[] = [];
   insert(): void {
+    if (!this.date) {
+      this.message = "Niste uneli datum";
+      return;
+    }
+    if (formatDate(this.date, 'yyyy-MM-dd', 'en_US') < formatDate(new Date(), 'yyyy-MM-dd', 'en_US')) {
+      this.message = "Nije dozvoljen datum u proslosti"
+      return;
+    }
+    if (this.timeoff) {
+      let sati = parseInt(this.timeoff.split(':')[0]) * 60
+      let minutiod = parseInt(this.timeoff.split(':')[1])
+      var ukupnood = sati + minutiod;
+    }
+    if (this.timeto) {
+      let satido = parseInt(this.timeto.split(':')[0]) * 60
+      let minutido = parseInt(this.timeto.split(':')[1])
+      var ukupnodo = satido + minutido
+    }
+    if (!this.timeto || !this.timeoff) {
+      this.message = "Niste uneli vreme"
+      return;
+    }
+    if (ukupnodo && ukupnood) {
+      if (ukupnodo < ukupnood) {
+        Swal.fire("Error", "Nije dobro vreme", "warning")
+        return;
+      }
+    }
+    if (this.capacity < 0) {
+      this.message = "Niste uneli kapacitet"
+      return
+    }
+    if (this.cena < 0) {
+      this.message = "Niste uneli cenu"
+      return
+    }
     this.bos.getAllTermin().subscribe((data: Booking[]) => {
       this.bookings = data;
       this.maxId();
       this.bos.insert(this.max + 1, this.date, this.timeoff, this.timeto, this.capacity, this.objekat.naziv, this.objekat.kategorija, this.cena, this.objekat.id).subscribe(resp => {
         if (resp['message'] == 'termin added') {
-          alert('ok')
-          location.reload()
+          Swal.fire({
+            title: resp['message'],
+            text: resp['message'],
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false
+          }).then(() => {
+            location.reload()
+          })
         }
-        else alert('ERROR!')
+        else Swal.fire("ERROR", "ERROR", "warning")
       })
     })
   }

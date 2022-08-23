@@ -16,7 +16,7 @@
             <table>
                 <tr>
                     <td>{{'naziv'|translate}}:</td>
-                    <td><input type="text" name="naziv" [(ngModel)]="naziv"></td>
+                    <td><input type="text" name="naziv" [(ngModel)]="naziv">&nbsp; &nbsp;</td>
                     <td>{{'kategorija'|translate}}:</td>
                                 <td>
                                     <select name="kategorija" [(ngModel)]="kategorija">
@@ -33,13 +33,14 @@
                                         <option value="teren za padl">{{'terenzapadl'|translate}}</option>
                                         <option value="teren za paintball">{{'terenzapaintball'|translate}}</option>
                                     </select>
+                                    &nbsp; &nbsp;
                                 </td>
                     <td>{{'datum'|translate}}:</td>
-                    <td><input type="date" name="date" [(ngModel)]="date"></td>
+                    <td><input type="date" name="date" [(ngModel)]="date">&nbsp; &nbsp;</td>
                     <td>{{'vremeod'|translate}}:</td>
-                    <td><input type="time" name="timeoff" [(ngModel)]="timeoff"></td>
+                    <td><input type="time" name="timeoff" [(ngModel)]="timeoff">&nbsp; &nbsp;</td>
                     <td>{{'vremedo'|translate}}:</td>
-                    <td><input type="time" name="timeto" [(ngModel)]="timeto"></td>
+                    <td><input type="time" name="timeto" [(ngModel)]="timeto">&nbsp; &nbsp;</td>
                     <td><button (click)="filter()" class="btn btn-success">{{'filtriraj'|translate}}</button></td>
                 </tr>
             </table>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SportObject } from 'src/models/sportobject';
 import { User } from 'src/models/user';
+import Swal from 'sweetalert2';
 import { SportObjectService } from '../sport-object.service';
 import { UserService } from '../user.service';
 
@@ -72,8 +73,15 @@ export class VlasnikComponent implements OnInit {
       this.maxId()
       this.s.insertObject(this.max + 1, this.naziv, this.kategorija, this.adresa, this.grad, this.telefon, this.email, this.korime).subscribe(resp => {
         if (resp['message'] == 'object added') {
-          alert("ok")
-          location.reload()
+          Swal.fire({
+            title:resp['message'],
+            text:resp['message'],
+            icon:"success",
+            timer:2000,
+            showConfirmButton:false
+          }).then(()=>{
+            location.reload()
+          })
         }
         else alert("ERROR!")
       })

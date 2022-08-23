@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet'
 import { Booking } from 'src/models/booking';
 import { SportObject } from 'src/models/sportobject';
 import { User } from 'src/models/user';
+import Swal from 'sweetalert2';
 import { BookingService } from '../booking.service';
 import { SportObjectService } from '../sport-object.service';
 import { UserService } from '../user.service';
@@ -20,7 +22,7 @@ export class PrikazPojedinogSportskogObjektaComponent implements OnInit {
       iconUrl: 'marker-icon.png'
     })
   };
-  constructor(private bos: BookingService, private sos: SportObjectService, private user:UserService, public translate: TranslateService) {
+  constructor(private r:Router, private bos: BookingService, private sos: SportObjectService, private user:UserService, public translate: TranslateService) {
     translate.setDefaultLang("sr-lat")
     if (sessionStorage.getItem("lang") == null)
       translate.use('sr-lat')
@@ -91,20 +93,26 @@ export class PrikazPojedinogSportskogObjektaComponent implements OnInit {
 
       if ((this.book.capacity - this.brOsoba) >= 0) {
         this.bos.update(sessionStorage.getItem('idterm'), this.book.capacity - this.brOsoba).subscribe(resp => {
-          alert(resp['message'])
-          location.reload()
+         
         })
         this.sos.getById(this.book.objekat).subscribe((data: SportObject) => {
           this.objekat = data
           this.bos.pdf(this.u.ime, this.u.email, this.u.prezime, this.book.cena * this.brOsoba, this.brOsoba, this.book.date, this.book.timeoff, this.book.timeto, this.book.naziv, this.objekat.email, this.objekat.telefon, sessionStorage.getItem('user'),sessionStorage.getItem("lang")).subscribe(resp => {
-            alert(resp['message'])
+            Swal.fire({
+              title:"Booked successFully",
+              text:resp['message']+" Booked successFully",
+              icon:"success",
+              timer:2000,
+              showConfirmButton:false
+            }).then(()=>{
+              this.r.navigate(["/rekreativac"])
+            })
           })
         })
 
       }
       else {
-        alert('nema mesta')
-      }
+        Swal.fire('Problem',"Nema mesta","warning")      }
     })
   }
 }

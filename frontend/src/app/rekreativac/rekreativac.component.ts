@@ -8,6 +8,7 @@ import { User } from 'src/models/user';
 import { SportObjectService } from '../sport-object.service';
 import { SportObject } from 'src/models/sportobject';
 import { TranslateService } from '@ngx-translate/core';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-rekreativac',
   templateUrl: './rekreativac.component.html',
@@ -44,7 +45,7 @@ export class RekreativacComponent implements OnInit {
     })
     this.link = this.r.url;
   }
-  link:string
+  link: string
   u: User;
   naziv: string;
   kategorija: string;
@@ -67,8 +68,15 @@ export class RekreativacComponent implements OnInit {
     }
     if (ukupnodo && ukupnood) {
       if (ukupnodo < ukupnood) {
-        alert("Nije dobro vreme")
-        return;
+        Swal.fire({
+          title:"Error",
+          text:"nije dobro vreme",
+          icon:"warning",
+          timer:3000,
+          showConfirmButton:false
+        }).then(()=>{
+          return;
+        })
       }
     }
     this.bos.getAllTermin().subscribe((data: Booking[]) => {
@@ -119,20 +127,26 @@ export class RekreativacComponent implements OnInit {
       this.book = data;
       if ((this.book.capacity - this.brOsoba) >= 0) {
         this.bos.update(idterm, this.book.capacity - this.brOsoba).subscribe(resp => {
-          alert(resp['message'])
-          location.reload()
+
         })
         this.sos.getById(this.book.objekat).subscribe((data: SportObject) => {
           this.so = data
-          this.bos.pdf(this.u.ime, this.u.email, this.u.prezime, this.book.cena * this.brOsoba, this.brOsoba, this.book.date, this.book.timeoff, this.book.timeto, this.book.naziv, this.so.email, this.so.telefon, sessionStorage.getItem('user'),sessionStorage.getItem("lang")).subscribe(resp => {
-            alert(resp['message'])
-            this.r.navigate(["/rekreativac"])
+          this.bos.pdf(this.u.ime, this.u.email, this.u.prezime, this.book.cena * this.brOsoba, this.brOsoba, this.book.date, this.book.timeoff, this.book.timeto, this.book.naziv, this.so.email, this.so.telefon, sessionStorage.getItem('user'), sessionStorage.getItem("lang")).subscribe(resp => {
+            Swal.fire({
+              title:"Booked successFully",
+              text:resp['message']+" Booked successFully",
+              icon:"success",
+              timer:5000,
+              showConfirmButton:false
+            }).then(()=>{
+              location.reload();
+            })
           })
         })
 
       }
       else {
-        alert('nema mesta')
+        Swal.fire('Problem',"Nema mesta","warning")
       }
     })
   }

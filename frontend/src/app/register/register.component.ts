@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/models/user';
+import Swal from 'sweetalert2';
 import { UserService } from '../user.service';
 
 @Component({
@@ -119,10 +120,17 @@ export class RegisterComponent implements OnInit {
       }
       this.s.register(this.ime, this.prezime, this.korime, this.lozinka, this.grad, this.datumRodjenja, this.email, this.telefon, this.tip, valid).subscribe((resp) => {
         if (resp['message'] == 'user added') {
-          alert("OK")
-          location.reload()
+          Swal.fire({
+            title:resp['message'],
+            text:resp['message'],
+            icon:"success",
+            timer:2000,
+            showConfirmButton:false
+          }).then(()=>{
+            location.reload()
+          })
         } else {
-          alert("ERROR")
+          Swal.fire("ERROR","ERROR","warning")
         }
         this.message = "";
       })
