@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private s: UserService, r: Router, public translate: TranslateService) {
+  constructor(private s: UserService,private r: Router, public translate: TranslateService) {
     translate.setDefaultLang("sr-lat")
     if (sessionStorage.getItem("lang") == null)
       translate.use('sr-lat')
@@ -127,7 +127,7 @@ export class RegisterComponent implements OnInit {
             timer:2000,
             showConfirmButton:false
           }).then(()=>{
-            location.reload()
+              this.r.navigate(["/"]);
           })
         } else {
           Swal.fire("ERROR","ERROR","warning")
